@@ -6,7 +6,7 @@ var {
   getRoom,
 } = require("../database.js");
 var _ = require("lodash");
-var { lazy_io } = require("../api.js");
+const { lazy_io } = require("../lazy-io.js");
 
 const validVotes = ["up", "down"];
 

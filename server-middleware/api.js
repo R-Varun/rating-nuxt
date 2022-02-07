@@ -2,6 +2,7 @@ const bodyParser = require("body-parser");
 const port = process.env.PORT || 3000;
 const app = require("express")();
 const socket = require("socket.io");
+const { lazy_io } = require("./lazy-io.js");
 
 const roomRouter = require("./routes/room.js");
 const setupRouter = require("./routes/setup.js");
@@ -11,7 +12,6 @@ const gameRouter = require("./routes/game.js");
 // room has an update, sends a message to the server. Server, in turn,
 // dispatches a message to all clients in the room telling them to update.
 let server = null;
-const lazy_io = { io: null };
 
 app.all("/init", (req, res) => {
   if (!server) {
@@ -56,4 +56,4 @@ app.use("/room", roomRouter);
 app.use("/setup", setupRouter);
 app.use("/game", gameRouter);
 
-module.exports = { app: app, lazy_io: lazy_io };
+module.exports = { app: app };
