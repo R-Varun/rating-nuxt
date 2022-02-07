@@ -30,9 +30,6 @@ function addRoom(roomName, owner) {
 
 function updateRoomWithImage(roomName, imgUrl) {
   const room = store.Rooms[roomName];
-  console.log("REPLACING IMAGE");
-  console.log(imgUrl);
-
   room["curImg"] = imgUrl;
 
   return true;
@@ -41,12 +38,9 @@ function updateRoomWithImage(roomName, imgUrl) {
 function updateRoomWithResult(roomName, result) {
   const room = store.Rooms[roomName];
   const votes = room["votes"];
-  console.log("votes " + votes);
 
-  console.log("votesKeys " + Object.keys(votes));
   Object.keys(votes).forEach((user) => {
     const vote = votes[user];
-    console.log(vote + ", " + user);
 
     if (_.isEqual(vote, result)) {
       room["scores"][user] += 1;
@@ -61,8 +55,6 @@ function updateRoomWithResult(roomName, result) {
 function updateRoomWithVote(roomName, userName, vote) {
   const room = store.Rooms[roomName];
 
-  console.log("CUR ROOM");
-  console.log(JSON.stringify(room));
   room["votes"][userName] = vote;
   return true;
 }

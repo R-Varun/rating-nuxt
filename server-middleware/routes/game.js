@@ -17,8 +17,6 @@ router.get("/:roomName/update", function(req, res, next) {
   const imgUrl = req.query.img_url;
   const actualDir = req.query.dir;
 
-  console.log("actual DIR" + actualDir);
-
   if (imgUrl) {
     updateRoomWithImage(roomName, imgUrl);
   }
@@ -26,6 +24,10 @@ router.get("/:roomName/update", function(req, res, next) {
   if (actualDir) {
     const actualVote = voteConv[actualDir];
     updateRoomWithResult(roomName, actualVote);
+    updateRoomWithImage(
+      roomName,
+      "https://upload.wikimedia.org/wikipedia/commons/b/bc/Unknown_person.jpg"
+    );
   }
 
   tryDispatchUpdate(roomName);
@@ -42,8 +44,6 @@ router.get("/:roomName/vote", function(req, res, next) {
   const userName = req.session.userName;
   const vote = req.query.dir;
 
-  console.log("ALL: " + roomName + ", " + userName + ", " + vote);
-
   updateRoomWithVote(roomName, userName, vote);
 
   res.json(getRoom(roomName));
@@ -56,11 +56,9 @@ router.get("/:roomName/fetch", function(req, res, next) {
 
 function tryDispatchUpdate(roomName) {
   if (!getIO()) {
-    console.log("IO not present!");
     return;
   }
 
-  console.log("IO IS PRESENT");
   getIO()
     .to(roomName)
     .emit("dispatchUpdate");
