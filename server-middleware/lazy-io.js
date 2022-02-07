@@ -1,7 +1,7 @@
 const lazy_io = { io: null };
 
 function setIO(io) {
-  lazy_io = io;
+  lazy_io.io = io;
 }
 
 function getIO() {
