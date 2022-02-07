@@ -81,7 +81,7 @@ export default defineComponent({
       await axios.get(base_url + "/api/init").then(async (resp) => {
         this.socket = io();
         this.socket.emit("subscribe", { roomName: roomName });
-        this.socket.on("dispatchUpdate", (req) => {
+        this.socket.on("dispatchUpdate", async (req) => {
           console.log("UPDATING CLIENT");
           await this.onUpdate();
         });
