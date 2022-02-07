@@ -47,7 +47,6 @@ function updateRoomWithResult(roomName, result) {
   Object.keys(votes).forEach((user) => {
     const vote = votes[user];
     console.log(vote + ", " + user);
-    console.log(_.isEquals(vote, result));
 
     if (_.isEqual(vote, result)) {
       room["scores"][user] += 1;
