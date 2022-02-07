@@ -97,10 +97,19 @@ export default defineComponent({
         this.currentImage = resp.data.curImg;
       }
     },
-    onDown: async function() {},
-    onUp: async function() {},
-    onTest: async function() {
-      await this.notifyUpdate();
+    onDown: async function() {
+      this.sendVote("down");
+    },
+    onUp: async function() {
+      this.sendVote("up");
+    },
+    sendVote: async function(dir) {
+      const params = { dir: dir };
+      await axios
+        .get(base_url + "/api/game/" + roomName + "/vote", { params: params })
+        .then(async (resp) => {
+          await this.notifyUpdate();
+        });
     },
     notifyUpdate: async function() {
       const roomName = this.$route.params.roomName;
