@@ -41,9 +41,13 @@ function updateRoomWithImage(roomName, imgUrl) {
 function updateRoomWithResult(roomName, result) {
   const room = store.Rooms[roomName];
   const votes = room["votes"];
+  console.log("votes " + votes);
 
+  console.log("votesKeys " + Object.keys(votes));
   Object.keys(votes).forEach((user) => {
     const vote = votes[user];
+    console.log(vote + ", " + user);
+    console.log(_.isEquals(vote, result));
 
     if (_.isEquals(vote, result)) {
       room["scores"][user] += 1;

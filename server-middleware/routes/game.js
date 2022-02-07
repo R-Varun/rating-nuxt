@@ -17,6 +17,7 @@ router.get("/:roomName/update", function(req, res, next) {
   const imgUrl = req.query.img_url;
   const actualDir = req.query.dir;
 
+  console.log("actual DIR" + actualDir);
   if (imgUrl) {
     updateRoomWithImage(roomName, imgUrl);
   }
