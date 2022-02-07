@@ -12,11 +12,11 @@ router.get("/:roomName/update", function(req, res, next) {
   const voteConv = { L: "down", R: "up" };
 
   const roomName = req.params.roomName;
-  const userName = req.session.userName;
+  const imgUrl = req.query.img_url;
   const actualDir = req.query.dir;
 
-  if (req.query.img_url) {
-    updateRoomWithImage(roomName, userName);
+  if (imgUrl) {
+    updateRoomWithImage(roomName, imgUrl);
   }
 
   if (actualDir) {
