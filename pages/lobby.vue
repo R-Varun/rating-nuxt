@@ -32,11 +32,9 @@
               </v-col>
             </v-row>
             <v-row>
-              <pre>
-                  <code class="block whitespace-pre overflow-x-scroll">
-                      {{roomState}}
-                  </code>
-              </pre>
+              <code class="block whitespace-pre overflow-x-scroll">
+                {{ roomState }}
+              </code>
             </v-row>
           </v-card-text>
         </v-card>
