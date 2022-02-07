@@ -40,11 +40,6 @@ function updateRoomWithImage(roomName, imgUrl) {
 
 function updateRoomWithResult(roomName, result) {
   const room = store.Rooms[roomName];
-
-  if (!(result in validVotes)) {
-    return false;
-  }
-
   const votes = room["votes"];
 
   Object.keys(votes).forEach((user) => {
