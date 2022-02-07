@@ -98,10 +98,10 @@ export default defineComponent({
       }
     },
     onDown: async function() {
-      this.sendVote("down");
+      await this.sendVote("down");
     },
     onUp: async function() {
-      this.sendVote("up");
+      await this.sendVote("up");
     },
     sendVote: async function(dir) {
       const roomName = this.$route.params.roomName;

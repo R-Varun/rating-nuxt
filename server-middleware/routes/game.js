@@ -40,6 +40,8 @@ router.get("/:roomName/vote", function(req, res, next) {
   const userName = req.session.userName;
   const vote = req.query.dir;
 
+  console.log("ALL: " + roomName + ", " + userName + ", " + vote);
+
   updateRoomWithVote(roomName, userName, vote);
 
   res.json(getRoom(roomName));
