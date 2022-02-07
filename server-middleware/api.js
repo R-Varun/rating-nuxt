@@ -7,7 +7,9 @@ const roomRouter = require("./routes/room.js");
 const setupRouter = require("./routes/setup.js");
 const gameRouter = require("./routes/game.js");
 
-// Web socket workaround for nuxt
+// Socket routine is very simple: clients can subscribe to a room, and when the
+// room has an update, sends a message to the server. Server, in turn,
+// dispatches a message to all clients in the room telling them to update.
 let server = null;
 let io = null;
 app.all("/init", (req, res) => {
@@ -18,19 +20,31 @@ app.all("/init", (req, res) => {
 
     io.on("connection", function(socket) {
       console.log("Made socket connection");
-      console.log(socket);
 
-      socket.on("msg", (msg) => {
-        console.log("Received: " + msg);
+      socket.on("subscribe", (req) => {
+        console.log("SUBSCRIBE EVENT RECEIVED!");
+        console.log(req);
 
-        setTimeout(() => {
-          socket.emit("msg", `Response to: ${msg}`);
-        }, 1000);
+        if (req) {
+          const roomName = req.roomName;
+          socket.join(roomName);
+        }
       });
 
-      socket.on("test", (msg) => {
-        console.log(msg);
+      socket.on("notifyUpdate", (req) => {
+        console.log("DISPATCHING UPDATE");
+        if (!req.roomName) {
+          return;
+        }
+        io.to(req.roomName).emit("dispatchUpdate");
       });
+
+      // setInterval(() => {
+      //   io.to("room1").emit("dispatchUpdate");
+      //   console.log("sending");
+      // }, 3000);
+
+      socket.on("update", (req) => {});
 
       socket.on("disconnect", () => console.log("disconnected"));
     });

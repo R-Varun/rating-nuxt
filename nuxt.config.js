@@ -13,6 +13,11 @@ export default {
         path: "/setup/:roomName",
         component: resolve(__dirname, "pages/setup.vue"),
       });
+      routes.push({
+        name: "lobby",
+        path: "/lobby/:roomName",
+        component: resolve(__dirname, "pages/lobby.vue"),
+      });
     },
   },
   server: {
@@ -61,19 +66,20 @@ export default {
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ["nuxt-session", "nuxt-socket-io"],
+  modules: ["nuxt-session"],
 
-  io: {
-    // module options
-    server: { ioSvc: "~/server-middleware/api.js" },
-    sockets: [
-      {
-        name: "main",
-        url: "http://localhost:3000",
-        default: true,
-      },
-    ],
-  },
+  // "nuxt-socket-io"
+  // io: {
+  //   // module options
+  //   server: { ioSvc: "~/server-middleware/api.js" },
+  //   sockets: [
+  //     {
+  //       name: "main",
+  //       url: "http://localhost:3000",
+  //       default: true,
+  //     },
+  //   ],
+  // },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
