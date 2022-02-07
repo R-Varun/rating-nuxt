@@ -33,7 +33,7 @@
             </v-row>
             <v-row>
               <pre>
-                  <code>
+                  <code class="block whitespace-pre overflow-x-scroll">
                       {{roomState}}
                   </code>
               </pre>

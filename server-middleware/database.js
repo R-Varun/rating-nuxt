@@ -63,10 +63,8 @@ function updateRoomWithResult(roomName, result) {
 function updateRoomWithVote(roomName, userName, vote) {
   const room = store.Rooms[roomName];
 
-  if (!(vote in validVotes)) {
-    return false;
-  }
-
+  console.log("CUR ROOM");
+  console.log(JSON.stringify(room));
   room["votes"][userName] = vote;
   return true;
 }
