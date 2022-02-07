@@ -52,9 +52,10 @@ router.get("/:roomName/fetch", function(req, res, next) {
 
 function tryDispatchUpdate(roomName) {
   if (!lazy_io.io) {
+    console.log("IO not present!");
     return;
   }
-
+  console.log("IO IS PRESENT");
   lazy_io.io.to(roomName).emit("dispatchUpdate");
 }
 
