@@ -4,7 +4,7 @@ var _ = require("lodash");
 router.get("/:roomName", function(req, res, next) {
   const roomName = req.params.roomName;
   const baseUrl = req.headers.host;
-  const updateUrl = baseUrl + "/game/" + roomName + "/update";
+  const updateUrl = "http://" + baseUrl + "/api/game/" + roomName + "/update";
 
   res.json({ outputScript: renderTemplate(updateUrl) });
 });

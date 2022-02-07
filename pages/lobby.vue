@@ -93,6 +93,9 @@ export default defineComponent({
       const roomName = this.$route.params.roomName;
       const resp = await axios.get(base_url + "/api/room/" + roomName + "/get");
       this.roomState = resp.data;
+      if (resp.data.curImg) {
+        this.currentImage = resp.data.curImg;
+      }
     },
     onDown: async function() {},
     onUp: async function() {},

@@ -30,6 +30,9 @@ function addRoom(roomName, owner) {
 
 function updateRoomWithImage(roomName, imgUrl) {
   const room = store.Rooms[roomName];
+  console.log("REPLACING IMAGE");
+  console.log(imgUrl);
+
   room["curImg"] = imgUrl;
 
   return true;
