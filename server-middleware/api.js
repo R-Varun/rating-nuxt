@@ -11,7 +11,7 @@ const gameRouter = require("./routes/game.js");
 // room has an update, sends a message to the server. Server, in turn,
 // dispatches a message to all clients in the room telling them to update.
 let server = null;
-let lazy_io = { io: null };
+const lazy_io = { io: null };
 
 app.all("/init", (req, res) => {
   if (!server) {

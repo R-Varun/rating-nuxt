@@ -1,5 +1,6 @@
 var router = require("express").Router();
 var {
+  updateRoomWithResult,
   updateRoomWithImage,
   updateRoomWithVote,
   getRoom,
