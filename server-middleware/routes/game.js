@@ -6,7 +6,7 @@ var {
   getRoom,
 } = require("../database.js");
 var _ = require("lodash");
-const { lazy_io } = require("../lazy-io.js");
+const { getIO } = require("../lazy-io.js");
 
 const validVotes = ["up", "down"];
 
@@ -51,12 +51,15 @@ router.get("/:roomName/fetch", function(req, res, next) {
 });
 
 function tryDispatchUpdate(roomName) {
-  if (!lazy_io.io) {
+  if (!getIO()) {
     console.log("IO not present!");
     return;
   }
+
   console.log("IO IS PRESENT");
-  lazy_io.io.to(roomName).emit("dispatchUpdate");
+  getIO()
+    .to(roomName)
+    .emit("dispatchUpdate");
 }
 
 module.exports = router;

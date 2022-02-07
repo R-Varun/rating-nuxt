@@ -2,7 +2,7 @@ const bodyParser = require("body-parser");
 const port = process.env.PORT || 3000;
 const app = require("express")();
 const socket = require("socket.io");
-const { lazy_io } = require("./lazy-io.js");
+const { setIO } = require("./lazy-io.js");
 
 const roomRouter = require("./routes/room.js");
 const setupRouter = require("./routes/setup.js");
@@ -18,7 +18,7 @@ app.all("/init", (req, res) => {
     server = res.socket.server;
     console.log(server);
     io = socket(server);
-    lazy_io.io = io;
+    setIO(io);
 
     io.on("connection", function(socket) {
       console.log("Made socket connection");
