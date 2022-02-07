@@ -11,12 +11,14 @@ const gameRouter = require("./routes/game.js");
 // room has an update, sends a message to the server. Server, in turn,
 // dispatches a message to all clients in the room telling them to update.
 let server = null;
-let io = null;
+let lazy_io = { io: null };
+
 app.all("/init", (req, res) => {
   if (!server) {
     server = res.socket.server;
     console.log(server);
     io = socket(server);
+    lazy_io.io = io;
 
     io.on("connection", function(socket) {
       console.log("Made socket connection");
@@ -39,11 +41,6 @@ app.all("/init", (req, res) => {
         io.to(req.roomName).emit("dispatchUpdate");
       });
 
-      // setInterval(() => {
-      //   io.to("room1").emit("dispatchUpdate");
-      //   console.log("sending");
-      // }, 3000);
-
       socket.on("update", (req) => {});
 
       socket.on("disconnect", () => console.log("disconnected"));
@@ -59,4 +56,4 @@ app.use("/room", roomRouter);
 app.use("/setup", setupRouter);
 app.use("/game", gameRouter);
 
-module.exports = app;
+module.exports = { app: app, lazy_io: lazy_io };

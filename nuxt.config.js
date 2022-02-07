@@ -1,5 +1,7 @@
 export default {
-  serverMiddleware: [{ path: "/api", handler: "~/server-middleware/api.js" }],
+  serverMiddleware: [
+    { path: "/api", handler: "~/server-middleware/outgoing-api.js" },
+  ],
 
   router: {
     extendRoutes(routes, resolve) {
@@ -71,7 +73,7 @@ export default {
   // "nuxt-socket-io"
   // io: {
   //   // module options
-  //   server: { ioSvc: "~/server-middleware/api.js" },
+  //   server: { ioSvc: "~/server-middleware/outgoing-api.js" },
   //   sockets: [
   //     {
   //       name: "main",

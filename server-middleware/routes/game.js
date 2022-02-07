@@ -5,6 +5,7 @@ var {
   getRoom,
 } = require("../database.js");
 var _ = require("lodash");
+var { lazy_io } = require("../api.js");
 
 const validVotes = ["up", "down"];
 
@@ -24,6 +25,7 @@ router.get("/:roomName/update", function(req, res, next) {
     updateRoomWithResult(roomName, actualVote);
   }
 
+  tryDispatchUpdate(roomName);
   return res.json({ room: getRoom(roomName) });
 });
 
@@ -34,7 +36,10 @@ router.get("/:roomName/poll", function(req, res, next) {
 
 router.get("/:roomName/vote", function(req, res, next) {
   const roomName = req.params.roomName;
+  const userName = req.session.userName;
   const vote = req.query.dir;
+
+  updateRoomWithVote(roomName, userName, vote);
 
   res.json(getRoom(roomName));
 });
@@ -43,5 +48,13 @@ router.get("/:roomName/fetch", function(req, res, next) {
   const roomName = req.params.roomName;
   res.json(getRoom(roomName));
 });
+
+function tryDispatchUpdate(roomName) {
+  if (!lazy_io.io) {
+    return;
+  }
+
+  lazy_io.io.to(roomName).emit("dispatchUpdate");
+}
 
 module.exports = router;
