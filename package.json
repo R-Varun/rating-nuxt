@@ -1,9 +1,9 @@
 {
-  "name": "NextKit-Free-Nuxt-Js-UI-Kit",
+  "name": "Stat-Tracker",
   "version": "1.0.0",
   "private": true,
-  "description": "NextUI - Free Nuxt Js UI Kit",
-  "author": "Wrappixel",
+  "description": "",
+  "author": "Big L. LLC",
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
@@ -11,11 +11,21 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
+    "@vue/composition-api": "^1.4.5",
+    "axios": "^0.25.0",
     "body-parser": "^1.19.1",
     "core-js": "^3.15.1",
     "express": "^4.17.2",
+    "express-session": "^1.17.2",
+    "fs": "*",
+    "http": "*",
+    "lodash": "^4.17.21",
     "nuxt": "^2.15.7",
     "nuxt-session": "^1.0.3",
+    "nuxt-socket-io": "^2.0.3",
+    "socket.io": "^4.4.1",
+    "socket.io-client": "^4.4.1",
+    "underscore": "^1.13.2",
     "vuetify": "^2.5.5"
   },
   "devDependencies": {

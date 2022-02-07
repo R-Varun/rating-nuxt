@@ -1,6 +1,20 @@
 export default {
   serverMiddleware: [{ path: "/api", handler: "~/server-middleware/api.js" }],
 
+  router: {
+    extendRoutes(routes, resolve) {
+      routes.push({
+        name: "join",
+        path: "/join/:roomName",
+        component: resolve(__dirname, "pages/join.vue"),
+      });
+      routes.push({
+        name: "setup",
+        path: "/setup/:roomName",
+        component: resolve(__dirname, "pages/setup.vue"),
+      });
+    },
+  },
   server: {
     port: process.env.PORT || 3000,
     host: process.env.HOST || "0.0.0.0",
@@ -10,8 +24,8 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: "%s - Nuxt js UI Kit",
-    title: "NuxtJs UI kit | Free UI kit built with Vuetifyy",
+    titleTemplate: "%s - Stat Tracker",
+    title: "Stat Tracker | Big Leap LLC.",
     htmlAttrs: {
       lang: "en",
     },
@@ -47,7 +61,19 @@ export default {
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [],
+  modules: ["nuxt-session", "nuxt-socket-io"],
+
+  io: {
+    // module options
+    server: { ioSvc: "~/server-middleware/api.js" },
+    sockets: [
+      {
+        name: "main",
+        url: "http://localhost:3000",
+        default: true,
+      },
+    ],
+  },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
