@@ -49,7 +49,7 @@ function updateRoomWithResult(roomName, result) {
     console.log(vote + ", " + user);
     console.log(_.isEquals(vote, result));
 
-    if (_.isEquals(vote, result)) {
+    if (_.isEqual(vote, result)) {
       room["scores"][user] += 1;
     }
   });
