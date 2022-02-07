@@ -17,14 +17,14 @@
             </v-row>
             <v-row>
               <v-col align="center">
-                <v-btn color="error" dark x-large @click="onTest">
+                <v-btn color="error" dark x-large @click="onDown">
                   <v-icon large color="orange darken-2">
                     mdi-arrow-down-bold-box-outline
                   </v-icon>
                 </v-btn>
               </v-col>
               <v-col align="center">
-                <v-btn color="success" x-large @click="onTest">
+                <v-btn color="success" x-large @click="onUp">
                   <v-icon large color="orange darken-2">
                     mdi-arrow-up-bold-box-outline
                   </v-icon>
@@ -104,12 +104,12 @@ export default defineComponent({
       this.sendVote("up");
     },
     sendVote: async function(dir) {
+      const roomName = this.$route.params.roomName;
       const params = { dir: dir };
-      await axios
-        .get(base_url + "/api/game/" + roomName + "/vote", { params: params })
-        .then(async (resp) => {
-          await this.notifyUpdate();
-        });
+      await axios.get(base_url + "/api/game/" + roomName + "/vote", {
+        params: params,
+      });
+      await this.notifyUpdate();
     },
     notifyUpdate: async function() {
       const roomName = this.$route.params.roomName;
